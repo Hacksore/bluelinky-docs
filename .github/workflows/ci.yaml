@@ -9,5 +9,5 @@ jobs:
       run: |
         git config --global user.email "hacksore@users.noreply.github.com"
         git config --global user.name "Sean Boult"
-        echo "machine github.com login Hacksore password $GH_TOKEN" > ~/.netrc
+        echo "machine github.com login Hacksore password ${{ secrets.GITHUB_TOKEN }}" > ~/.netrc
         cd website && yarn install && GIT_USER=Hacksore yarn run publish-gh-pages
