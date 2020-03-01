@@ -36,9 +36,9 @@ function Versions(props) {
                   {/* You are supposed to change this href where appropriate
                         Example: href="<baseUrl>/docs(/:language)/:id" */}
                   <a
-                    href={`${siteConfig.baseUrl}${siteConfig.docsUrl}/${
+                    href={`${siteConfig.baseUrl}${siteConfig.docsUrl}/getting-started/${
                       props.language ? props.language + '/' : ''
-                    }doc1`}>
+                    }`}>
                     Documentation
                   </a>
                 </td>
@@ -52,27 +52,6 @@ function Versions(props) {
             This is the version that is configured automatically when you first
             install this project.
           </p>
-          <h3 id="rc">Pre-release versions</h3>
-          <table className="versions">
-            <tbody>
-              <tr>
-                <th>master</th>
-                <td>
-                  {/* You are supposed to change this href where appropriate
-                        Example: href="<baseUrl>/docs(/:language)/next/:id" */}
-                  <a
-                    href={`${siteConfig.baseUrl}${siteConfig.docsUrl}/${
-                      props.language ? props.language + '/' : ''
-                    }next/doc1`}>
-                    Documentation
-                  </a>
-                </td>
-                <td>
-                  <a href={repoUrl}>Source Code</a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
           <p>Other text describing this section.</p>
           <h3 id="archive">Past Versions</h3>
           <p>Here you can find previous versions of the documentation.</p>
@@ -89,7 +68,7 @@ function Versions(props) {
                         <a
                           href={`${siteConfig.baseUrl}${siteConfig.docsUrl}/${
                             props.language ? props.language + '/' : ''
-                          }${version}/doc1`}>
+                          }${version}/getting-started`}>
                           Documentation
                         </a>
                       </td>

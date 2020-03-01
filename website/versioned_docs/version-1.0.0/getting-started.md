@@ -25,3 +25,7 @@ client.on('ready', async () => {
 });
 ```
 
+
+## More info
+Check out the [API Docs](api-reference) if you need more information
+
