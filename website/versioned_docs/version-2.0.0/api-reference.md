@@ -15,7 +15,7 @@ config
 {
   username: 'username', // Required - Username for the BlueLink account
   password: 'password', // Required - Password for the BlueLink account
-  region: 'US', // Required - Region where the vehicle/account is
+  region: 'US', // Required - Region where the vehicle/account is (US, EU) Supprt for CA is in the works
   pin: '1234', // Required - PIN code used on the account for the vehicle
   autoLogin: true, // Optional - override the autologin behaviour
   deviceUuid: '202020202' // Optional - Something use for EU?
@@ -31,7 +31,7 @@ Tells the library to login to BlueLink API
 
 Returns a list of all vehicles found on the account.
 
-### `getVehicle()`
+### `getVehicle(vin: string)`
 
 Returns a new vehicle based on the inputed vin number.
 
@@ -44,16 +44,22 @@ Allows you to request a new access token.
 
 ### `start()`
 
-Start the vehicle with optional configuration setting
+Start the vehicle with optional configuration setting.
+For EVs, this only starts airconditioning.
 
 ```js
-{}
+{
+  defrost: boolean;
+  windscreenHeating: boolean;
+  temperature: number; // Decimal with 0.5 precition min: 15.0 max 30.0
+  unit: string; // 'C' or 'F'
+}
 ```
-#### return - startConfig: StartConfig): Promise<string>
 
 ### `stop()`
 
-Stop the vehicle
+Stop the vehicle.
+For EVs, this only stops airconditioning.
 
 ### `lock()`
 
@@ -63,8 +69,37 @@ Lock the vehicle
 
 Unlock the vehicle
 
-### `status()`
+### `update()`
 
-Gather the status of the vehicle
+updates the vehicles status, location and odometer (if supported by the given region)
+
+### `status`
+
+Get the last status snapshot of the vehicle.
+
+### `location`
+
+Get the last location snapshot of the vehicle.
+
+### `odometer`
+
+Get the last odometer state snapshot of the vehicle.
+
+### `location`
+
+Get the last location snapshot of the vehicle.
+
+
+
+## Events
+
+```js
+const client = new BlueLinky(config);
+
+client.on('ready', (vehicles) => {
+  // Client has logged inn, and vehicles contains
+  // all the logged inn users vehicles.
+}));
+```
 
 # TODO: some some design from https://testing-library.com/docs/react-testing-library/api on how they did their API
