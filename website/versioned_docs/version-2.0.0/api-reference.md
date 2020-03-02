@@ -1,12 +1,12 @@
 ---
-id: version-1.0.0-api-reference
+id: version-2.0.0-api-reference
 title: API Overview
 original_id: api-reference
 ---
 
 ## Bluelinky Client
 
-### `Bluelinky(config)`
+### `Bluelinky()`
 
 This is the client in which you interact.
 
@@ -31,7 +31,7 @@ Tells the library to login to BlueLink API
 
 Returns a list of all vehicles found on the account.
 
-### `getVehicle(vin: string)`
+### `getVehicle()`
 
 Returns a new vehicle based on the inputed vin number.
 
@@ -93,13 +93,14 @@ Get the last location snapshot of the vehicle.
 
 ## Events
 
+
+### ready
+The ready event is fired when the client has finished logging in to the BlueLink API. It also does a lookup to get all the vehicles associated with your account.
 ```js
 const client = new BlueLinky(config);
 
 client.on('ready', (vehicles) => {
-  // Client has logged inn, and vehicles contains
+  // Client has logged in, and vehicles contains
   // all the logged inn users vehicles.
 }));
 ```
-
-# TODO: some some design from https://testing-library.com/docs/react-testing-library/api on how they did their API

@@ -33,14 +33,20 @@ function Versions(props) {
               <tr>
                 <th>{latestVersion}</th>
                 <td>
-                  {/* You are supposed to change this href where appropriate
-                        Example: href="<baseUrl>/docs(/:language)/:id" */}
                   <a
                     href={`${siteConfig.baseUrl}${siteConfig.docsUrl}/getting-started/${
                       props.language ? props.language + '/' : ''
                     }`}>
                     Documentation
-                  </a>
+                  </a>          
+                </td>
+                <td>
+                  <a
+                    href={`${siteConfig.baseUrl}${siteConfig.docsUrl}/api-reference/${
+                      props.language ? props.language + '/' : ''
+                    }`}>
+                    API Reference
+                  </a>        
                 </td>
                 <td>
                   <a href="">Release Notes</a>
@@ -63,13 +69,19 @@ function Versions(props) {
                     <tr key={version}>
                       <th>{version}</th>
                       <td>
-                        {/* You are supposed to change this href where appropriate
-                        Example: href="<baseUrl>/docs(/:language)/:version/:id" */}
                         <a
                           href={`${siteConfig.baseUrl}${siteConfig.docsUrl}/${
                             props.language ? props.language + '/' : ''
                           }${version}/getting-started`}>
                           Documentation
+                        </a>
+                      </td>
+                      <td>
+                        <a
+                          href={`${siteConfig.baseUrl}${siteConfig.docsUrl}/${
+                            props.language ? props.language + '/' : ''
+                          }${version}/api-reference`}>
+                          API Refernce
                         </a>
                       </td>
                       <td>
