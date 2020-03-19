@@ -37,7 +37,7 @@ const siteConfig = {
   },
 
   highlight: {
-    theme: 'dracula',
+    theme: 'zenburn',
     version: '9.12.0',
     hljs: function(highlightJsInstance) {
       // do something here
@@ -68,7 +68,7 @@ const siteConfig = {
   enableUpdateTime: true,
 
   algolia: {
-    apiKey: '',
+    apiKey: '9f7f619be2986c1f0045b99f78ad31a9',
     indexName: 'bluelinky',
     algoliaOptions: {}
   },

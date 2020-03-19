@@ -6,89 +6,133 @@ original_id: api-reference
 
 ## Bluelinky Client
 
-### `Bluelinky()`
+## `Bluelinky()`
 
 This is the client in which you interact.
 
-config
-```js
-{
-  username: 'username', // Required - Username for the BlueLink account
-  password: 'password', // Required - Password for the BlueLink account
-  region: 'US', // Required - Region where the vehicle/account is (US, EU) Supprt for CA is in the works
-  pin: '1234', // Required - PIN code used on the account for the vehicle
-  autoLogin: true, // Optional - override the autologin behaviour
-  deviceUuid: '202020202' // Optional - Something use for EU?
-}
+**Parameters:**
+| Name       | Type    | Required | Default | Comment                             |
+| ---------- | ------- | -------- | ------- | ----------------------------------- |
+| username   | string  | yes      | N/A     | Username for the account            |
+| password   | string  | yes      | N/A     | Password for the account            |
+| region     | region  | yes      | N/A     | Region US/EU/CA                     |
+| autoLogin  | boolean | yes      | true    | If the client automatically logs in |
+| deviceUuid | string  | yes (EU) | N/A     | Used only by EU                     |
 
+
+## `login()`
+Send your credentials to the server, get auth tokens.
+
+```js
+login()
 ```
 
-### `login()`
+#### Returns
+`Promise<string>`
 
-Tells the library to login to BlueLink API
+## `getVehicles()`
+Get a list of all vehicles found on the account.
 
-### `getVehicles()`
+```js
+getVehicles()
+```
 
-Returns a list of all vehicles found on the account.
+#### Returns
+`List<Vehicle>`
 
-### `getVehicle()`
+## `getVehicle()`
 
-Returns a new vehicle based on the inputed vin number.
+Get a vehicle instance based on the inputed vin number.
 
-### `refreshAccessToken()`
+```js
+getVehicles(vinNumber: String)
+```
+
+#### Returns
+`Vehicle`
+
+## `refreshAccessToken()`
 
 Allows you to request a new access token.
 
+#### Returns
+`Promise<string>`
 
 ## Vehicle
 
-### `start()`
+## `start()`
+
+```js
+start(config: Object)
+```
 
 Start the vehicle with optional configuration setting.
 For EVs, this only starts airconditioning.
 
-```js
-{
-  defrost: boolean;
-  windscreenHeating: boolean;
-  temperature: number; // Decimal with 0.5 precition min: 15.0 max 30.0
-  unit: string; // 'C' or 'F'
-}
-```
+**StartConfig:**
+| Name                 | Type    | Comment |
+| -------------------- | ------- | -------- |
+| airCtrl              | string  | Turn on the HVAC                           |
+| igniOnDuration       | string  | How long to run (max 10)                   |
+| airTempvalue         | region  | Temp in Fahrenheit                         |
+| defrost              | boolean | Turn on defrosters, side mirrors, etc      |
+| heating1             | string  | yes (EU)                                   |
 
-### `stop()`
+
+## `stop()`
 
 Stop the vehicle.
 For EVs, this only stops airconditioning.
 
-### `lock()`
+```js
+stop()
+```
 
-Lock the vehicle
+## `lock()`
 
-### `unlock()`
+Lock the vehicle.
 
-Unlock the vehicle
+```js
+lock()
+```
 
-### `update()`
 
-updates the vehicles status, location and odometer (if supported by the given region)
+## `unlock()`
 
-### `status`
+Unlock the vehicle.
+
+```js
+unlock()
+```
+
+## `update()`
+
+Updates the vehicles status, location and odometer (if supported by the given region).
+
+```js
+update()
+```
+
+## `status`
 
 Get the last status snapshot of the vehicle.
 
-### `location`
+```js
+status()
+```
+
+
+## `location`
 
 Get the last location snapshot of the vehicle.
 
-### `odometer`
+## `odometer`
 
 Get the last odometer state snapshot of the vehicle.
 
-### `location`
+## `location`
 
 Get the last location snapshot of the vehicle.
-
 
 
 ## Events
