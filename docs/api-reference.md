@@ -1,69 +1,109 @@
 ---
 id: api-reference
 title: API Overview
+original_id: api-reference
 ---
+
+# NOTE: Docs are WIP and probably not updated fullly
 
 ## Bluelinky Client
 
-### `Bluelinky(config)`
+## `Bluelinky()`
 
 This is the client in which you interact.
 
-config
-```js
-{
-  username: 'username', // Required - Username for the BlueLink account
-  password: 'password', // Required - Password for the BlueLink account
-  region: 'US', // Required - Region where the vehicle/account is
-  pin: '1234', // Required - PIN code used on the account for the vehicle
-  autoLogin: true, // Optional - override the autologin behaviour
-  deviceUuid: '202020202' // Optional - Something use for EU?
-}
+**Parameters:**
+| Name | Type | Required | Default | Comment |
+| ---------- | ------- | -------- | ------- | ----------------------------------- |
+| username | string | yes | N/A | Username for the account |
+| password | string | yes | N/A | Password for the account |
+| region | region | yes | N/A | Region US/EU/CA |
+| autoLogin | boolean | no | true | If the client automatically logs in |
 
-```
+## `login()`
 
-### `login()`
+Send your credentials to the server, get auth tokens.
 
-Tells the library to login to BlueLink API
+#### Returns
 
-### `getVehicles()`
+`Promise<string>`
 
-Returns a list of all vehicles found on the account.
+## `getVehicles()`
 
-### `getVehicle()`
+Get a list of all vehicles found on the account.
 
-Returns a new vehicle based on the inputed vin number.
+#### Returns
 
-### `refreshAccessToken()`
+`List<Vehicle>`
+
+## `getVehicle()`
+
+Get a vehicle instance based on the inputed vin number.
+
+#### Returns
+
+`Vehicle`
+
+## `refreshAccessToken()`
 
 Allows you to request a new access token.
 
+#### Returns
+
+`Promise<string>`
 
 ## Vehicle
 
-### `start()`
+## `start()`
 
-Start the vehicle with optional configuration setting
+Start the vehicle with optional configuration setting.
+For EVs, this only starts airconditioning.
+
+**StartConfig:**
+| Name | Type | Comment |
+| -------------------- | ------- | -------- |
+| airCtrl | string | Turn on the HVAC |
+| igniOnDuration | string | How long to run (max 10) |
+| airTempvalue | region | Temp in Fahrenheit |
+| defrost | boolean | Turn on defrosters, side mirrors, etc |
+| heating1 | string | yes (EU) |
+
+## `stop()`
+
+Stop the vehicle.
+For EVs, this only stops airconditioning.
+
+## `lock()`
+
+Lock the vehicle.
+
+## `unlock()`
+
+Unlock the vehicle.
+
+## `status()`
+
+Get the status of the vehicle.
+
+## `location()`
+
+Get the location of the vehicle.
+
+## `odometer()`
+
+Get the odometer of the vehicle.
+
+## Events
+
+### ready
+
+The ready event is fired when the client has finished logging in to the BlueLink API. It also does a lookup to get all the vehicles associated with your account.
 
 ```js
-{}
+const client = new BlueLinky(config);
+
+client.on('ready', (vehicles) => {
+  // Client has logged in, and vehicles contains
+  // all the logged inn users vehicles.
+}));
 ```
-#### return - startConfig: StartConfig): Promise<string>
-
-### `stop()`
-
-Stop the vehicle
-
-### `lock()`
-
-Lock the vehicle
-
-### `unlock()`
-
-Unlock the vehicle
-
-### `status()`
-
-Gather the status of the vehicle
-
-# TODO: some some design from https://testing-library.com/docs/react-testing-library/api on how they did their API

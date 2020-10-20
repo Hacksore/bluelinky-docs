@@ -67,11 +67,11 @@ const siteConfig = {
   // Show documentation's last update time.
   enableUpdateTime: true,
 
-  algolia: {
-    apiKey: '9f7f619be2986c1f0045b99f78ad31a9',
-    indexName: 'bluelinky',
-    algoliaOptions: {}
-  },
+  // algolia: {
+  //   apiKey: '9f7f619be2986c1f0045b99f78ad31a9',
+  //   indexName: 'bluelinky',
+  //   algoliaOptions: {}
+  // },
 };
 
 module.exports = siteConfig;
